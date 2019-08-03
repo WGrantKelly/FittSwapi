@@ -1,3 +1,5 @@
+//this file was recommended on SWAPI's site for a fetch wrapper in javascript. I am a firm believer in using the resources available to you to get the job done as long as they are safe, and maintained.
+
 var swapiModule = (function() {
   var rootURL = "https://swapi.co/api/";
 

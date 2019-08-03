@@ -4,8 +4,11 @@ import ReactDOM from 'react-dom'
 import SearchResults from './SearchResults';
 
 function Search() {
+
+  //declares stateful values for the search term the client is putting into the form field
   const [ searchIn, setSearchIn ] = useState('');
 
+  //function to get the results section rendered on the Enter! button click
   const SearchForm = (e) => {
     e.preventDefault();
     console.log(`You Searched: ${searchIn}`);
@@ -13,7 +16,9 @@ function Search() {
     ReactDOM.render(<SearchResults strang={searchIn} />, results);
   };
 
-  console.log(`search input thing: ${searchIn}`);
+  console.log(`search field input: ${searchIn}`);
+
+  //render the form to gather client input, on change, set the state of searchIn
   return (
     <div className={css(styles.searchContainer)}>
       <label htmlFor="search" className={css(styles.label)}>Search:</label>
