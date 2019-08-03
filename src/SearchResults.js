@@ -35,37 +35,38 @@ function SearchResults(props) {
     }
     console.log("tab: ", tab);
 
-    //render the column headers
-    var tr = document.createElement("tr");
     if(tab!=null && jsonData!=null){
-      for (var key in jsonData[0]) {
-        var td = document.createElement("td");
-        var txt = document.createTextNode(key);
-        td.appendChild(txt);
-        tr.appendChild(td);
-      }
-      tab.appendChild(tr);
-    }
-    
-    //for every record returned in json, create a row in the table
-    for (var i = 0; i < jsonData.length; i++) {
-        tr = document.createElement("tr");
+      //render the column headers
+      var tr = document.createElement("tr");
       
-        //for every record, return its value. Check to see if it is an array, and if it is, return all of the values in that array in the one cell
-      for (var key in jsonData[i]) {
-        var td = document.createElement("td");
-        if(Array.isArray(jsonData[i][key])){
-          for (var j = 0; j < jsonData[i][key].length; j++) {
-            var txt = document.createTextNode(" " + jsonData[i][key][j]);
+        for (var key in jsonData[0]) {
+          var td = document.createElement("td");
+          var txt = document.createTextNode(key);
+          td.appendChild(txt);
+          tr.appendChild(td);
+        }
+        tab.appendChild(tr);
+      
+      //for every record returned in json, create a row in the table
+      for (var i = 0; i < jsonData.length; i++) {
+          tr = document.createElement("tr");
+        
+          //for every record, return its value. Check to see if it is an array, and if it is, return all of the values in that array in the one cell
+        for (var key in jsonData[i]) {
+          var td = document.createElement("td");
+          if(Array.isArray(jsonData[i][key])){
+            for (var j = 0; j < jsonData[i][key].length; j++) {
+              var txt = document.createTextNode(" " + jsonData[i][key][j]);
+              td.appendChild(txt);
+            }
+          }else{
+            var txt = document.createTextNode(jsonData[i][key]);
             td.appendChild(txt);
           }
-        }else{
-          var txt = document.createTextNode(jsonData[i][key]);
-          td.appendChild(txt);
+          tr.appendChild(td);
         }
-        tr.appendChild(td);
+        tab.append(tr);
       }
-      tab.append(tr);
     }
 
   }

@@ -1,5 +1,6 @@
 table, th, td {
     border: 1px solid black;
+    border-collapse: collapse;
 }
 .buttonBox{
     margin: 25px;
@@ -24,4 +25,10 @@ table, th, td {
 #randoColorItem3{
     background-color: black;
     padding: 25px;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+tr:hover {
+    background-color: yellow;
 }
