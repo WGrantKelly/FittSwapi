@@ -10,6 +10,7 @@ function SearchResults(props) {
   const [resultsReturned, setResultsReturned] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
   useEffect(() => {
+    console.log("current state of json: ", jsonData);
     swapiModule.getPeople({page: pageNumber, search: props.strang}, function(data) {
         console.log("All results that match ", props.strang, " ", data);
         setResultsReturned(data.results.length)
@@ -75,11 +76,123 @@ function SearchResults(props) {
       );
     }
   }
+  
+  function sortByEyeColor(){
+    console.log("sorting by eye color")
+    let tempdata = jsonData;
+    tempdata = tempdata.sort(function(a,b){
+      if(a["eye_color"] == b["eye_color"])
+          return 0;
+      if(a["eye_color"] < b["eye_color"])
+          return -1;
+      if(a["eye_color"] > b["eye_color"])
+          return 1;
+    });
+    setJsonData(tempdata);
+    console.log("TEMP JSON: ", tempdata);
+    console.log("JSON: ", jsonData);
+    displayTable()
+      
+    
+  }
+  function sortByMass(){
+    console.log("sorting by mass")
+    let tempdata = jsonData;
+    tempdata = tempdata.sort(function(a,b){
+      if(a["mass"] == b["mass"])
+          return 0;
+      if(a["mass"] < b["mass"])
+          return -1;
+      if(a["mass"] > b["mass"])
+          return 1;
+    });
+    setJsonData(tempdata);
+    console.log("TEMP JSON: ", tempdata);
+    console.log("JSON: ", jsonData);
+    displayTable()
+      
+    
+  }
+  function sortByGender(){
+    console.log("sorting by gender")
+    let tempdata = jsonData;
+    tempdata = tempdata.sort(function(a,b){
+      if(a["gender"] == b["gender"])
+          return 0;
+      if(a["gender"] < b["gender"])
+          return -1;
+      if(a["gender"] > b["gender"])
+          return 1;
+    });
+    setJsonData(tempdata);
+    console.log("TEMP JSON: ", tempdata);
+    console.log("JSON: ", jsonData);
+    displayTable()
+     
+  }
+
+  function sortWrapper(){
+    // if(jsonData.length>0){
+      return(
+        <div className="buttonBox">
+          <div>
+            <button type="submit" value="eye color" onClick={sortByEyeColor}>Eye Color</button>
+          </div>
+          <div>
+            <button type="submit" value="Mass" onClick={sortByMass}>Mass</button>
+          </div>
+          <div>
+            <button type="submit" value="Gender" onClick={sortByGender}>Gender</button>
+          </div>
+        </div>
+      );
+    // }
+      
+  }
+
+  function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+  
+  
+  
+  function setRandomColor() {
+    if(document.getElementById("randoColorItem1")!=null){
+      document.getElementById("randoColorItem1").style.backgroundColor = getRandomColor();
+    document.getElementById("randoColorItem2").style.backgroundColor = getRandomColor();
+    document.getElementById("randoColorItem3").style.backgroundColor = getRandomColor();
+  
+    }
+  }
+
   return (
     <div>
+      <div className="randoColorBox">
+        <div id="randoColorItem1">
+
+        </div>
+        <div id="randoColorItem2">
+
+        </div>
+        <div id="randoColorItem3">
+
+        </div>
+
+      </div>
+      <div>
+        {setRandomColor()}
+      </div>
       <div className="buttonBox">
         {lastPage()}
         {nextPage()}
+      </div>
+      <div>
+        {sortWrapper()}
       </div>
       <table id="searchResultsTable">
       </table>

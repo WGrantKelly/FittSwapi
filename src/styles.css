@@ -2,7 +2,26 @@ table, th, td {
     border: 1px solid black;
 }
 .buttonBox{
+    margin: 25px;
     display: flex;
     flex-direction: row; 
     justify-content: center;
+}
+.randoColorBox{
+    margin: 25px;
+    display: flex;
+    flex-direction: row; 
+    justify-content: center;
+}
+#randoColorItem1{
+    background-color: black;
+    padding: 25px;
+}
+#randoColorItem2{
+    background-color: black;
+    padding: 25px;
+}
+#randoColorItem3{
+    background-color: black;
+    padding: 25px;
 }
