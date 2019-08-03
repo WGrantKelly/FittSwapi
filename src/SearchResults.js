@@ -28,23 +28,33 @@ function SearchResults(props) {
     }
     console.log("tab: ", tab);
 
+    var tr = document.createElement("tr");
+    if(tab!=null && jsonData!=null){
+      for (var key in jsonData[0]) {
+        var td = document.createElement("td");
+        var txt = document.createTextNode(key);
+        td.appendChild(txt);
+        tr.appendChild(td);
+      }
+      tab.appendChild(tr);
+    }
+    
+
     for (var i = 0; i < jsonData.length; i++) {
-      var tr = document.createElement("tr");
+        tr = document.createElement("tr");
       
       for (var key in jsonData[i]) {
+        var td = document.createElement("td");
         if(Array.isArray(jsonData[i][key])){
           for (var j = 0; j < jsonData[i][key].length; j++) {
-            var td = document.createElement("td");
-            var txt = document.createTextNode(jsonData[i][key][j]);
+            var txt = document.createTextNode(" " + jsonData[i][key][j]);
             td.appendChild(txt);
-            tr.appendChild(td);
           }
         }else{
-          var td = document.createElement("td");
           var txt = document.createTextNode(jsonData[i][key]);
           td.appendChild(txt);
-          tr.appendChild(td);
         }
+        tr.appendChild(td);
       }
       tab.append(tr);
     }
